@@ -47,16 +47,16 @@ else:
     cur=conn.cursor()
     cur.execute("DROP TABLE IF EXISTS CONTACTS")
     sql = ''' CREATE TABLE CONTACTS(
-        index INTEGER PRIMARY KEY,
+        id VARCHAR(20) PRIMARY KEY,
         name VARCHAR(50),
         phone VARCHAR(25),
         email VARCHAR(75),
-        id VARCHAR(20),
+        
         country VARCHAR(50) )'''
     try:
         cur.execute(sql)
-    except Exception:
-        print("please check sql query")
+    except Exception as e:
+        print("please check sql query", type(e))
     else:
         conn.commit()
         print("table created")
