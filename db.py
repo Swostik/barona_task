@@ -1,19 +1,22 @@
 #library to connect to postgresql
 import psycopg2
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 try :
     conn = psycopg2.connect(
         host="localhost",
-        user="postgres",
-        password="password",
+        user=os.environ.get('db_user'),
+        password=os.environ.get('db_password'),
     
     )
 except Exception:
     print('Database not connected ', type(Exception))
 else:
-
+    print("Database connected")
     conn.autocommit = True
-    print("connection")
+    
     cur = conn.cursor()
     #listing all the database that already exist
     cur.execute("SELECT datname FROM pg_Database;")
@@ -33,8 +36,8 @@ try:
     conn = psycopg2.connect(
         host="localhost",
         dbname="barona",
-        user="postgres",
-        password="password",
+        user=os.environ.get('db_user'),
+        password=os.environ.get('db_password'),
     
     )
 except Exception as e:
